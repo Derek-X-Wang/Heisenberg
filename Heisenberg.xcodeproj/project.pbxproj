@@ -16,6 +16,8 @@
 		314B02C5200B84500006E12A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 314B02C3200B84500006E12A /* LaunchScreen.storyboard */; };
 		314B02CF200B87650006E12A /* SearchResultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314B02CD200B87650006E12A /* SearchResultCell.swift */; };
 		314B02D0200B87650006E12A /* SearchResultCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 314B02CE200B87650006E12A /* SearchResultCell.xib */; };
+		31B04D2C200CDA9500F95952 /* SwingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31B04D2B200CDA9500F95952 /* SwingController.swift */; };
+		31B04D2E200D04B900F95952 /* SwingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31B04D2D200D04B900F95952 /* SwingView.swift */; };
 		5C7A324C155B26C278DCE7CB /* Pods_Heisenberg.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 469368440AEFA2F4FA941707 /* Pods_Heisenberg.framework */; };
 /* End PBXBuildFile section */
 
@@ -32,6 +34,8 @@
 		314B02C6200B84500006E12A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		314B02CD200B87650006E12A /* SearchResultCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultCell.swift; sourceTree = "<group>"; };
 		314B02CE200B87650006E12A /* SearchResultCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchResultCell.xib; sourceTree = "<group>"; };
+		31B04D2B200CDA9500F95952 /* SwingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwingController.swift; sourceTree = "<group>"; };
+		31B04D2D200D04B900F95952 /* SwingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwingView.swift; sourceTree = "<group>"; };
 		469368440AEFA2F4FA941707 /* Pods_Heisenberg.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Heisenberg.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		59790255D2EF0D10B7653C57 /* Pods-Heisenberg.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Heisenberg.release.xcconfig"; path = "Pods/Target Support Files/Pods-Heisenberg/Pods-Heisenberg.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -77,6 +81,7 @@
 		314B02B9200B84500006E12A /* Heisenberg */ = {
 			isa = PBXGroup;
 			children = (
+				31B04D2B200CDA9500F95952 /* SwingController.swift */,
 				314B02CC200B874F0006E12A /* Search */,
 				314B02BA200B84500006E12A /* AppDelegate.swift */,
 				314B02BC200B84500006E12A /* ViewController.swift */,
@@ -85,6 +90,7 @@
 				314B02C3200B84500006E12A /* LaunchScreen.storyboard */,
 				314B02C6200B84500006E12A /* Info.plist */,
 				31281C37200C8B5900B55239 /* GoogleService-Info.plist */,
+				31B04D2D200D04B900F95952 /* SwingView.swift */,
 			);
 			path = Heisenberg;
 			sourceTree = "<group>";
@@ -250,6 +256,8 @@
 				314B02BD200B84500006E12A /* ViewController.swift in Sources */,
 				314B02CF200B87650006E12A /* SearchResultCell.swift in Sources */,
 				314B02BB200B84500006E12A /* AppDelegate.swift in Sources */,
+				31B04D2E200D04B900F95952 /* SwingView.swift in Sources */,
+				31B04D2C200CDA9500F95952 /* SwingController.swift in Sources */,
 				31281C3A200C939200B55239 /* FirebaseContactManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
