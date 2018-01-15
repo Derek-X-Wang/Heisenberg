@@ -7,14 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		31281C38200C8B5900B55239 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 31281C37200C8B5900B55239 /* GoogleService-Info.plist */; };
+		31281C3A200C939200B55239 /* FirebaseContactManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31281C39200C939200B55239 /* FirebaseContactManager.swift */; };
 		314B02BB200B84500006E12A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314B02BA200B84500006E12A /* AppDelegate.swift */; };
 		314B02BD200B84500006E12A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314B02BC200B84500006E12A /* ViewController.swift */; };
 		314B02C0200B84500006E12A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 314B02BE200B84500006E12A /* Main.storyboard */; };
 		314B02C2200B84500006E12A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 314B02C1200B84500006E12A /* Assets.xcassets */; };
 		314B02C5200B84500006E12A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 314B02C3200B84500006E12A /* LaunchScreen.storyboard */; };
+		314B02CF200B87650006E12A /* SearchResultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314B02CD200B87650006E12A /* SearchResultCell.swift */; };
+		314B02D0200B87650006E12A /* SearchResultCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 314B02CE200B87650006E12A /* SearchResultCell.xib */; };
+		5C7A324C155B26C278DCE7CB /* Pods_Heisenberg.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 469368440AEFA2F4FA941707 /* Pods_Heisenberg.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1B8DC8518C8DCAF35570A816 /* Pods-Heisenberg.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Heisenberg.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Heisenberg/Pods-Heisenberg.debug.xcconfig"; sourceTree = "<group>"; };
+		31281C37200C8B5900B55239 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		31281C39200C939200B55239 /* FirebaseContactManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseContactManager.swift; sourceTree = "<group>"; };
 		314B02B7200B84500006E12A /* Heisenberg.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Heisenberg.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		314B02BA200B84500006E12A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		314B02BC200B84500006E12A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -22,6 +30,10 @@
 		314B02C1200B84500006E12A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		314B02C4200B84500006E12A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		314B02C6200B84500006E12A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		314B02CD200B87650006E12A /* SearchResultCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultCell.swift; sourceTree = "<group>"; };
+		314B02CE200B87650006E12A /* SearchResultCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchResultCell.xib; sourceTree = "<group>"; };
+		469368440AEFA2F4FA941707 /* Pods_Heisenberg.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Heisenberg.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		59790255D2EF0D10B7653C57 /* Pods-Heisenberg.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Heisenberg.release.xcconfig"; path = "Pods/Target Support Files/Pods-Heisenberg/Pods-Heisenberg.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,17 +41,28 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5C7A324C155B26C278DCE7CB /* Pods_Heisenberg.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		13A1B42DFE2B62AE932127C6 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				469368440AEFA2F4FA941707 /* Pods_Heisenberg.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		314B02AE200B84500006E12A = {
 			isa = PBXGroup;
 			children = (
 				314B02B9200B84500006E12A /* Heisenberg */,
 				314B02B8200B84500006E12A /* Products */,
+				4E5428B036584857E375CA52 /* Pods */,
+				13A1B42DFE2B62AE932127C6 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -54,14 +77,35 @@
 		314B02B9200B84500006E12A /* Heisenberg */ = {
 			isa = PBXGroup;
 			children = (
+				314B02CC200B874F0006E12A /* Search */,
 				314B02BA200B84500006E12A /* AppDelegate.swift */,
 				314B02BC200B84500006E12A /* ViewController.swift */,
 				314B02BE200B84500006E12A /* Main.storyboard */,
 				314B02C1200B84500006E12A /* Assets.xcassets */,
 				314B02C3200B84500006E12A /* LaunchScreen.storyboard */,
 				314B02C6200B84500006E12A /* Info.plist */,
+				31281C37200C8B5900B55239 /* GoogleService-Info.plist */,
 			);
 			path = Heisenberg;
+			sourceTree = "<group>";
+		};
+		314B02CC200B874F0006E12A /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				314B02CD200B87650006E12A /* SearchResultCell.swift */,
+				314B02CE200B87650006E12A /* SearchResultCell.xib */,
+				31281C39200C939200B55239 /* FirebaseContactManager.swift */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
+		4E5428B036584857E375CA52 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				1B8DC8518C8DCAF35570A816 /* Pods-Heisenberg.debug.xcconfig */,
+				59790255D2EF0D10B7653C57 /* Pods-Heisenberg.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -71,9 +115,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 314B02C9200B84500006E12A /* Build configuration list for PBXNativeTarget "Heisenberg" */;
 			buildPhases = (
+				07E92CE1C99993D380D34619 /* [CP] Check Pods Manifest.lock */,
 				314B02B3200B84500006E12A /* Sources */,
 				314B02B4200B84500006E12A /* Frameworks */,
 				314B02B5200B84500006E12A /* Resources */,
+				CE60C4F5CA7C844992EEC252 /* [CP] Embed Pods Frameworks */,
+				B2789B2C85D2308DFA160A3A /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -125,11 +172,75 @@
 			files = (
 				314B02C5200B84500006E12A /* LaunchScreen.storyboard in Resources */,
 				314B02C2200B84500006E12A /* Assets.xcassets in Resources */,
+				31281C38200C8B5900B55239 /* GoogleService-Info.plist in Resources */,
+				314B02D0200B87650006E12A /* SearchResultCell.xib in Resources */,
 				314B02C0200B84500006E12A /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		07E92CE1C99993D380D34619 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Heisenberg-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B2789B2C85D2308DFA160A3A /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Heisenberg/Pods-Heisenberg-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CE60C4F5CA7C844992EEC252 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Heisenberg/Pods-Heisenberg-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
+				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Heisenberg/Pods-Heisenberg-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		314B02B3200B84500006E12A /* Sources */ = {
@@ -137,7 +248,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				314B02BD200B84500006E12A /* ViewController.swift in Sources */,
+				314B02CF200B87650006E12A /* SearchResultCell.swift in Sources */,
 				314B02BB200B84500006E12A /* AppDelegate.swift in Sources */,
+				31281C3A200C939200B55239 /* FirebaseContactManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -272,6 +385,7 @@
 		};
 		314B02CA200B84500006E12A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1B8DC8518C8DCAF35570A816 /* Pods-Heisenberg.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -287,6 +401,7 @@
 		};
 		314B02CB200B84500006E12A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 59790255D2EF0D10B7653C57 /* Pods-Heisenberg.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
