@@ -58,7 +58,7 @@ class ViewController: UIViewController {
             })
             .do(onNext: { [weak self] query in
                 /* Clear Results on Invalid Call */
-                if query.count  < 3 {
+                if query.isEmpty {
                     self?.results.removeAll()
                     self?.tableView.reloadData()
                 } 
@@ -66,7 +66,7 @@ class ViewController: UIViewController {
             .subscribeOn(backgroundScheduler)
             .filter({
                 /* Query only if length more than 3 */
-                $0.count >= 3
+                !$0.isEmpty
             })
             .distinctUntilChanged({
                 /* Prevent duplicate API calls */
