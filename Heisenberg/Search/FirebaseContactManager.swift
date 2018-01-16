@@ -49,7 +49,7 @@ class FirebaseContactManager {
             try containers.forEach({
                 let predicate = CNContact.predicateForContactsInContainer(withIdentifier: $0.identifier)
                 let contacts = try store.unifiedContacts(matching: predicate, keysToFetch: keys as [CNKeyDescriptor])
-                print($0.identifier, contacts.count)
+                print("🎈", $0.identifier, contacts.count)
                 contacts.forEach {
                     if let contactString = $0.phoneNumbers.first?.value.stringValue {
                         /* Trim whitespaces, take last 5 digits of Contact */
@@ -62,10 +62,10 @@ class FirebaseContactManager {
                         }
                     }
                 }
-                reference.updateChildValues(updateData)
             })
-        } catch _ {
-            print("🎈 error fetching contacts")
+            reference.updateChildValues(updateData)
+        } catch let error {
+            print("🎈 error fetching contacts", error.localizedDescription)
         }
     }
     
@@ -86,7 +86,7 @@ class FirebaseContactManager {
         return Observable<[String]>.create { [unowned self] (observer) -> Disposable in
             self.reference
                 .queryOrdered(byChild: "name")
-                .queryEqual(toValue: query)
+                .queryStarting(atValue: query)
                 .queryLimited(toFirst: 10)
                 .observeSingleEvent(of: .value, with: { (snapshot) in
                     let value = snapshot.value as? NSDictionary
@@ -94,8 +94,10 @@ class FirebaseContactManager {
                     if let keys = value?.allKeys {
                         results = keys.flatMap({ (key) -> String? in
                             let data = value?[key] as? NSDictionary
-                            let name = data?["name"] as? String
-                            return name
+                            if let name = data?["name"] as? String, name.hasPrefix(query) {
+                                return name
+                            }
+                            return nil
                         })    
                     }
                     results.sort()
