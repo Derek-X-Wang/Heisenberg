@@ -22,6 +22,15 @@ class ViewController: UIViewController {
     let firebaseContactManager = FirebaseContactManager()
     var results = [String]()
     
+    override func viewDidAppear(_ animated: Bool) {
+        NotificationCenter.default.addObserver(self, selector: #selector(ViewController.keyboardWasShown), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(ViewController.keyboardWasShown), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -73,7 +82,20 @@ class ViewController: UIViewController {
             })
         .disposed(by: disposeBag)
         
+        self.firebaseContactManager.fetchContacts()
+    }
+    
+    @objc func keyboardWasShown (notification: NSNotification) {
+        let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue ?? CGRect.zero
+        var contentInsets: UIEdgeInsets
+        if UIInterfaceOrientationIsPortrait(UIApplication.shared.statusBarOrientation) {
+            contentInsets = UIEdgeInsetsMake(0.0, 0.0, keyboardSize.height, 0.0);
+        } else {
+            contentInsets = UIEdgeInsetsMake(0.0, 0.0, keyboardSize.width, 0.0);
+        }
         
+        tableView.contentInset = contentInsets
+        tableView.scrollIndicatorInsets = tableView.contentInset
     }
 }
 
