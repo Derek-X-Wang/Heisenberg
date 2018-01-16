@@ -27,7 +27,7 @@ class ReactiveMotion {
             }
             
             return Disposables.create {
-                self.manager.startDeviceMotionUpdates()
+                self.manager.stopDeviceMotionUpdates()
             }
         })
     }()
