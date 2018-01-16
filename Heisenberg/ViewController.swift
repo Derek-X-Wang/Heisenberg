@@ -85,16 +85,12 @@ class ViewController: UIViewController {
         self.firebaseContactManager.fetchContacts()
     }
     
+    /* Keyboard Util */
     @objc func keyboardWasShown (notification: NSNotification) {
         let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue ?? CGRect.zero
-        var contentInsets: UIEdgeInsets
-        if UIInterfaceOrientationIsPortrait(UIApplication.shared.statusBarOrientation) {
-            contentInsets = UIEdgeInsetsMake(0.0, 0.0, keyboardSize.height, 0.0);
-        } else {
-            contentInsets = UIEdgeInsetsMake(0.0, 0.0, keyboardSize.width, 0.0);
-        }
-        
-        tableView.contentInset = contentInsets
+        let isPortrait = UIInterfaceOrientationIsPortrait(UIApplication.shared.statusBarOrientation)
+        let inset: CGFloat = isPortrait ? keyboardSize.height : keyboardSize.width
+        tableView.contentInset = UIEdgeInsetsMake(0.0, 0.0, inset, 0.0);
         tableView.scrollIndicatorInsets = tableView.contentInset
     }
 }

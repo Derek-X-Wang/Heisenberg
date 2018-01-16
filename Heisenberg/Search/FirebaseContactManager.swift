@@ -45,7 +45,6 @@ class FirebaseContactManager {
         
         let containerId = store.defaultContainerIdentifier()
         let predicate = CNContact.predicateForContactsInContainer(withIdentifier: containerId)
-        
         do {
             let contacts = try store.unifiedContacts(matching: predicate, keysToFetch: keys as [CNKeyDescriptor])
             var updateData: [String : Any] = [String : Any]()
@@ -61,7 +60,7 @@ class FirebaseContactManager {
                 }
             }
             reference.updateChildValues(updateData)
-        } catch let _ {
+        } catch _ {
             print("🎈 error fetching contacts")
         }
     }
