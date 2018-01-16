@@ -53,10 +53,12 @@ class FirebaseContactManager {
                     /* Trim whitespaces, take last 5 digits of Contact */
                     let formattedContact = contactString.trimmingCharacters(in: .whitespaces)
                     let obscuredContact = String(formattedContact.suffix(5))
-                    updateData[obscuredContact] = [
-                        "name" : $0.givenName + " " + $0.familyName,
-                        "contact" : obscuredContact
-                    ]
+                    if !obscuredContact.isEmpty {
+                        updateData[obscuredContact] = [
+                            "name" : $0.givenName + " " + $0.familyName,
+                            "contact" : obscuredContact
+                        ]
+                    }
                 }
             }
             reference.updateChildValues(updateData)
