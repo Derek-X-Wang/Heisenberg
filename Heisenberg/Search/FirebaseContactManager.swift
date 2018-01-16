@@ -43,24 +43,27 @@ class FirebaseContactManager {
         let store = CNContactStore()
         let keys = [CNContactGivenNameKey, CNContactFamilyNameKey, CNContactPhoneNumbersKey]
         
-        let containerId = store.defaultContainerIdentifier()
-        let predicate = CNContact.predicateForContactsInContainer(withIdentifier: containerId)
+        var updateData: [String : Any] = [String : Any]()
         do {
-            let contacts = try store.unifiedContacts(matching: predicate, keysToFetch: keys as [CNKeyDescriptor])
-            var updateData: [String : Any] = [String : Any]()
-            contacts.forEach {
-                if let contactString = $0.phoneNumbers.first?.value.stringValue {
-                    /* Trim whitespaces, take last 5 digits of Contact */
-                    let obscuredContact = String(formatKey(contactString).suffix(5))
-                    if !obscuredContact.isEmpty {
-                        updateData[obscuredContact] = [
-                            "name" : $0.givenName + " " + $0.familyName,
-                            "contact" : obscuredContact
-                        ]
+            let containers = try store.containers(matching: nil)
+            try containers.forEach({
+                let predicate = CNContact.predicateForContactsInContainer(withIdentifier: $0.identifier)
+                let contacts = try store.unifiedContacts(matching: predicate, keysToFetch: keys as [CNKeyDescriptor])
+                print($0.identifier, contacts.count)
+                contacts.forEach {
+                    if let contactString = $0.phoneNumbers.first?.value.stringValue {
+                        /* Trim whitespaces, take last 5 digits of Contact */
+                        let obscuredContact = String(formatKey(contactString).suffix(5))
+                        if !obscuredContact.isEmpty {
+                            updateData[obscuredContact] = [
+                                "name" : $0.givenName + " " + $0.familyName,
+                                "contact" : obscuredContact
+                            ]
+                        }
                     }
                 }
-            }
-            reference.updateChildValues(updateData)
+                reference.updateChildValues(updateData)
+            })
         } catch _ {
             print("🎈 error fetching contacts")
         }
@@ -83,7 +86,7 @@ class FirebaseContactManager {
         return Observable<[String]>.create { [unowned self] (observer) -> Disposable in
             self.reference
                 .queryOrdered(byChild: "name")
-                .queryStarting(atValue: query)
+                .queryEqual(toValue: query)
                 .queryLimited(toFirst: 10)
                 .observeSingleEvent(of: .value, with: { (snapshot) in
                     let value = snapshot.value as? NSDictionary

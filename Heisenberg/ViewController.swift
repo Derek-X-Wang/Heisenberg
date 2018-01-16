@@ -49,6 +49,7 @@ class ViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         
+        searchController.searchBar.autocapitalizationType = .words
         searchController.searchBar.rx.text
             .debounce(0.5, scheduler: MainScheduler.instance)
             .map({
