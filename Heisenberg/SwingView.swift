@@ -53,10 +53,10 @@ class SwingView: UIView {
         }
         
         motion.asObservable()
-            .map({ Int($0.attitude.roll * 1000) })
+            .map({ Int($0.attitude.roll * 100) })
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { (roll) in
-            if abs(roll - self.lastRoll) > 10 {
+            if abs(roll - self.lastRoll) > 1 {
                 let direction = (self.lastRoll - roll) > 0 ? 1 : -1
                 self.imageIndex = max(min(59, self.imageIndex + direction), 0)
                 self.mosaicImage.frame.origin = CGPoint(x: self.xOrigin, y: self.yOrigin)
