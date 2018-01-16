@@ -52,6 +52,11 @@ class FirebaseContactManager {
                 if let contactString = $0.phoneNumbers.first?.value.stringValue {
                     /* Trim whitespaces, take last 5 digits of Contact */
                     let formattedContact = contactString.trimmingCharacters(in: .whitespaces)
+                        .replacingOccurrences(of: "#", with: "")
+                        .replacingOccurrences(of: "$", with: "")
+                        .replacingOccurrences(of: "[", with: "")
+                        .replacingOccurrences(of: "]", with: "")
+                    
                     let obscuredContact = String(formattedContact.suffix(5))
                     if !obscuredContact.isEmpty {
                         updateData[obscuredContact] = [
