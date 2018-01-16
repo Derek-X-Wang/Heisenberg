@@ -7,25 +7,22 @@
 //
 
 import UIKit
-import CoreMotion
+import RxSwift
 
 class SwingController: UIViewController {
-    
+    let motion = ReactiveMotion()
+    var motionDisposable: Disposable?
     @IBOutlet weak var swingView: SwingView!
-    let manager = CMMotionManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        manager.deviceMotionUpdateInterval = 1 / 60
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        manager.startDeviceMotionUpdates(to: OperationQueue.main) { (motion, error) in
-            self.swingView.update(motion: motion)
-        }
+        motionDisposable = motion.motionObservable.bind(to: swingView.motion)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        manager.stopDeviceMotionUpdates()
+        motionDisposable?.dispose()
     }
 }

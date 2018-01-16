@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -69,18 +70,19 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ngI-NI-MZc" customClass="SwingView" customModule="Heisenberg" customModuleProvider="target">
-                                <rect key="frame" x="127.5" y="104" width="120" height="150"/>
+                                <rect key="frame" x="16" y="80" width="343" height="429"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="150" id="5UY-Y6-TVi"/>
-                                    <constraint firstAttribute="width" constant="120" id="Oyy-Nj-dpW"/>
+                                    <constraint firstAttribute="width" secondItem="ngI-NI-MZc" secondAttribute="height" multiplier="4:5" id="9XD-2x-XRi"/>
                                 </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="ngI-NI-MZc" firstAttribute="centerX" secondItem="yHc-xd-6cz" secondAttribute="centerX" id="3rd-IL-YE6"/>
-                            <constraint firstItem="ngI-NI-MZc" firstAttribute="top" secondItem="yHc-xd-6cz" secondAttribute="top" constant="40" id="tOF-fF-j10"/>
+                            <constraint firstItem="yHc-xd-6cz" firstAttribute="trailing" secondItem="ngI-NI-MZc" secondAttribute="trailing" constant="16" id="4re-75-OUZ"/>
+                            <constraint firstItem="ngI-NI-MZc" firstAttribute="leading" secondItem="yHc-xd-6cz" secondAttribute="leading" constant="16" id="Pla-Ni-2dW"/>
+                            <constraint firstItem="ngI-NI-MZc" firstAttribute="top" secondItem="yHc-xd-6cz" secondAttribute="top" constant="16" id="tOF-fF-j10"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="yHc-xd-6cz"/>
                     </view>

@@ -7,14 +7,19 @@
 //
 
 import UIKit
+import RxSwift
 import CoreMotion
 
+
 class SwingView: UIView {
+    var disposeBag = DisposeBag()
     var mosaicImage: UIImageView!
-    var isDebug = false
     
-    var imageIndex: Int = 30
+    var isDebug = false
     var lastRoll: Int = 0
+    var imageIndex: Int = 30
+    var motion = PublishSubject<CMDeviceMotion>()
+    
     var xOrigin: CGFloat {
         return CGFloat(imageIndex % 10) * -self.frame.width
     }
@@ -46,20 +51,21 @@ class SwingView: UIView {
             borderView.layer.borderWidth = 2
             addSubview(borderView)
         }
+        
+        motion.asObservable()
+            .map({ Int($0.attitude.roll * 1000) })
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { (roll) in
+            if abs(roll - self.lastRoll) > 10 {
+                let direction = (self.lastRoll - roll) > 0 ? 1 : -1
+                self.imageIndex = max(min(59, self.imageIndex + direction), 0)
+                self.mosaicImage.frame.origin = CGPoint(x: self.xOrigin, y: self.yOrigin)
+                self.lastRoll = roll
+            }
+        }).disposed(by: disposeBag)
     }
     
     override func layoutSubviews() {
         mosaicImage.frame = CGRect(x: xOrigin, y: yOrigin, width: frame.width * 10, height: frame.height * 6)
-    }
-    
-    func update(motion: CMDeviceMotion?) {
-        guard let motion = motion else { return }
-        let roll = Int(motion.attitude.roll * 100)
-        if abs(roll - lastRoll) > 1 {
-            let direction = (lastRoll - roll) > 0 ? 1 : -1
-            imageIndex = max(min(59, imageIndex + direction), 0)
-            mosaicImage.frame.origin = CGPoint(x: xOrigin, y: yOrigin)
-            lastRoll = roll
-        }
     }
 }
