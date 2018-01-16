@@ -51,13 +51,7 @@ class FirebaseContactManager {
             contacts.forEach {
                 if let contactString = $0.phoneNumbers.first?.value.stringValue {
                     /* Trim whitespaces, take last 5 digits of Contact */
-                    let formattedContact = contactString.trimmingCharacters(in: .whitespaces)
-                        .replacingOccurrences(of: "#", with: "")
-                        .replacingOccurrences(of: "$", with: "")
-                        .replacingOccurrences(of: "[", with: "")
-                        .replacingOccurrences(of: "]", with: "")
-                    
-                    let obscuredContact = String(formattedContact.suffix(5))
+                    let obscuredContact = String(formatKey(contactString).suffix(5))
                     if !obscuredContact.isEmpty {
                         updateData[obscuredContact] = [
                             "name" : $0.givenName + " " + $0.familyName,
@@ -70,6 +64,19 @@ class FirebaseContactManager {
         } catch _ {
             print("🎈 error fetching contacts")
         }
+    }
+    
+    func formatKey(_ string: String) -> String {
+        /* Replace with better implementation */
+        return string.trimmingCharacters(in: .whitespaces)
+            .replacingOccurrences(of: " ", with: "")
+            .replacingOccurrences(of: ".", with: "")
+            .replacingOccurrences(of: "-", with: "")
+            .replacingOccurrences(of: "#", with: "")
+            .replacingOccurrences(of: "$", with: "")
+            .replacingOccurrences(of: "[", with: "")
+            .replacingOccurrences(of: "]", with: "")
+            .replacingOccurrences(of: "/", with: "")
     }
     
     func search(query: String) -> Observable<[String]> {
