@@ -1,4 +1,21 @@
 PODS:
+  - AWSAuthCore (2.6.10):
+    - AWSCore (= 2.6.10)
+  - AWSAuthUI (2.6.10):
+    - AWSAuthCore (= 2.6.10)
+    - AWSCore (= 2.6.10)
+  - AWSCognitoIdentityProvider (2.6.10):
+    - AWSCognitoIdentityProviderASF (= 1.0.1)
+    - AWSCore (= 2.6.10)
+  - AWSCognitoIdentityProviderASF (1.0.1)
+  - AWSCore (2.6.10)
+  - AWSDynamoDB (2.6.10):
+    - AWSCore (= 2.6.10)
+  - AWSMobileClient (2.6.10):
+    - AWSAuthCore (= 2.6.10)
+  - AWSUserPoolsSignIn (2.6.10):
+    - AWSAuthCore (= 2.6.10)
+    - AWSCognitoIdentityProvider (= 2.6.10)
   - Firebase/Core (4.8.0):
     - FirebaseAnalytics (= 4.0.5)
     - FirebaseCore (= 4.0.13)
@@ -32,12 +49,24 @@ PODS:
   - RxSwift (4.1.0)
 
 DEPENDENCIES:
+  - AWSAuthUI (~> 2.6.6)
+  - AWSDynamoDB (~> 2.6.6)
+  - AWSMobileClient (~> 2.6.6)
+  - AWSUserPoolsSignIn (~> 2.6.6)
   - Firebase/Core
   - Firebase/Database
   - RxCocoa (~> 4.0)
   - RxSwift (~> 4.0)
 
 SPEC CHECKSUMS:
+  AWSAuthCore: d5e52ee671c815bee92c8fc1077fb6bd526f026a
+  AWSAuthUI: 7635d801f4162f812fa00f7711917371d3392269
+  AWSCognitoIdentityProvider: f88d27fef26b131191da06c0a9a398e3c686945c
+  AWSCognitoIdentityProviderASF: f94f1a502e72ef3d0a1de93e10bf7a79c8698118
+  AWSCore: 5bb072a6b5b185f43ddbd239d6554d2f8a285ad2
+  AWSDynamoDB: 46c7d83862a8375fb824796dc60b04f9273c5d3f
+  AWSMobileClient: 6bdf1228aa064a9f2ee9db1486f09bfc6bc64c1e
+  AWSUserPoolsSignIn: c9752ce399f314a556e61f3527f72887c2f0df7a
   Firebase: 710decbbc6d9d48530e9a5dba3209740c3532e05
   FirebaseAnalytics: 5b02a63ead2c3f0259cfc7f15e053e440587ecf8
   FirebaseCore: 3c02ec652db3d03fdc8bc6d9154af3e20d64b6f5
@@ -49,6 +78,6 @@ SPEC CHECKSUMS:
   RxCocoa: cc1fec49cdc8fabe645964de7c51c099a36c2aa8
   RxSwift: 4219941c1244c88002901bd87a69d3aea9ae71f0
 
-PODFILE CHECKSUM: 1abd0639872a093e3d61802907fd6e8a2f719ab5
+PODFILE CHECKSUM: 531c198a693f8ffc52fc195c81e5c27cfdee5f8b
 
-COCOAPODS: 1.3.1
+COCOAPODS: 1.2.0

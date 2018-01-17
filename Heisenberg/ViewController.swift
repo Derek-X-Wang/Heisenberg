@@ -10,7 +10,6 @@ import UIKit
 import RxCocoa
 import RxSwift
 import Foundation
-import FirebaseDatabase
 
 class ViewController: UIViewController {
     var disposeBag = DisposeBag()
@@ -19,7 +18,7 @@ class ViewController: UIViewController {
     /* Summy Results */
     let backgroundScheduler = ConcurrentDispatchQueueScheduler(qos: .userInitiated)
     let searchController = UISearchController(searchResultsController: nil)
-    let firebaseContactManager = FirebaseContactManager()
+    let contactManager = AWSContactManager()
     var results = [String]()
     
     override func viewDidAppear(_ animated: Bool) {
@@ -63,7 +62,7 @@ class ViewController: UIViewController {
                     self?.tableView.reloadData()
                 } 
             })
-            .subscribeOn(backgroundScheduler)
+            .observeOn(backgroundScheduler)
             .filter({
                 /* Query only if length more than 3 */
                 !$0.isEmpty
@@ -73,9 +72,9 @@ class ViewController: UIViewController {
                 return $0 == $1
             })
             .flatMap({
-                return self.firebaseContactManager.search(query: $0)
+                return self.contactManager.search(query: $0)
             })
-            .subscribeOn(MainScheduler.instance)
+            .observeOn(MainScheduler.instance)
             .subscribe(onNext: { (results) in
                 self.results.removeAll()
                 self.results.append(contentsOf: results)
@@ -83,7 +82,7 @@ class ViewController: UIViewController {
             })
         .disposed(by: disposeBag)
         
-        self.firebaseContactManager.fetchContacts()
+        self.contactManager.fetchContacts()
     }
     
     /* Keyboard Util */

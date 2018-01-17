@@ -20,6 +20,9 @@
 		31B04D2E200D04B900F95952 /* SwingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31B04D2D200D04B900F95952 /* SwingView.swift */; };
 		31B04D30200DD6E900F95952 /* ReactiveMotion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31B04D2F200DD6E900F95952 /* ReactiveMotion.swift */; };
 		31B04D32200DE78C00F95952 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31B04D31200DE78C00F95952 /* StringExtension.swift */; };
+		58727A9F200FE25A00A4B725 /* AWSContactManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58727A9E200FE25A00A4B725 /* AWSContactManager.swift */; };
+		58727AA4200FFD4A00A4B725 /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58727AA3200FFD4A00A4B725 /* Contact.swift */; };
+		58727AA820100EE700A4B725 /* awsconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = 58727AA720100EE700A4B725 /* awsconfiguration.json */; };
 		5C7A324C155B26C278DCE7CB /* Pods_Heisenberg.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 469368440AEFA2F4FA941707 /* Pods_Heisenberg.framework */; };
 /* End PBXBuildFile section */
 
@@ -41,6 +44,9 @@
 		31B04D2F200DD6E900F95952 /* ReactiveMotion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactiveMotion.swift; sourceTree = "<group>"; };
 		31B04D31200DE78C00F95952 /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		469368440AEFA2F4FA941707 /* Pods_Heisenberg.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Heisenberg.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		58727A9E200FE25A00A4B725 /* AWSContactManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AWSContactManager.swift; sourceTree = "<group>"; };
+		58727AA3200FFD4A00A4B725 /* Contact.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
+		58727AA720100EE700A4B725 /* awsconfiguration.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = awsconfiguration.json; sourceTree = "<group>"; };
 		59790255D2EF0D10B7653C57 /* Pods-Heisenberg.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Heisenberg.release.xcconfig"; path = "Pods/Target Support Files/Pods-Heisenberg/Pods-Heisenberg.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -85,6 +91,8 @@
 		314B02B9200B84500006E12A /* Heisenberg */ = {
 			isa = PBXGroup;
 			children = (
+				58727AA720100EE700A4B725 /* awsconfiguration.json */,
+				58727AA0200FFD4A00A4B725 /* AmazonAws */,
 				31B04D2B200CDA9500F95952 /* SwingController.swift */,
 				31B04D2F200DD6E900F95952 /* ReactiveMotion.swift */,
 				314B02CC200B874F0006E12A /* Search */,
@@ -107,6 +115,7 @@
 				314B02CD200B87650006E12A /* SearchResultCell.swift */,
 				314B02CE200B87650006E12A /* SearchResultCell.xib */,
 				31281C39200C939200B55239 /* FirebaseContactManager.swift */,
+				58727A9E200FE25A00A4B725 /* AWSContactManager.swift */,
 			);
 			path = Search;
 			sourceTree = "<group>";
@@ -118,6 +127,30 @@
 				59790255D2EF0D10B7653C57 /* Pods-Heisenberg.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		58727AA0200FFD4A00A4B725 /* AmazonAws */ = {
+			isa = PBXGroup;
+			children = (
+				58727AA1200FFD4A00A4B725 /* Models */,
+			);
+			path = AmazonAws;
+			sourceTree = "<group>";
+		};
+		58727AA1200FFD4A00A4B725 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				58727AA2200FFD4A00A4B725 /* NoSQL */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		58727AA2200FFD4A00A4B725 /* NoSQL */ = {
+			isa = PBXGroup;
+			children = (
+				58727AA3200FFD4A00A4B725 /* Contact.swift */,
+			);
+			path = NoSQL;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -184,6 +217,7 @@
 			files = (
 				314B02C5200B84500006E12A /* LaunchScreen.storyboard in Resources */,
 				314B02C2200B84500006E12A /* Assets.xcassets in Resources */,
+				58727AA820100EE700A4B725 /* awsconfiguration.json in Resources */,
 				31281C38200C8B5900B55239 /* GoogleService-Info.plist in Resources */,
 				314B02D0200B87650006E12A /* SearchResultCell.xib in Resources */,
 				314B02C0200B84500006E12A /* Main.storyboard in Resources */,
@@ -208,7 +242,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		B2789B2C85D2308DFA160A3A /* [CP] Copy Pods Resources */ = {
@@ -261,6 +295,8 @@
 			files = (
 				314B02BD200B84500006E12A /* ViewController.swift in Sources */,
 				314B02CF200B87650006E12A /* SearchResultCell.swift in Sources */,
+				58727AA4200FFD4A00A4B725 /* Contact.swift in Sources */,
+				58727A9F200FE25A00A4B725 /* AWSContactManager.swift in Sources */,
 				314B02BB200B84500006E12A /* AppDelegate.swift in Sources */,
 				31B04D30200DD6E900F95952 /* ReactiveMotion.swift in Sources */,
 				31B04D32200DE78C00F95952 /* StringExtension.swift in Sources */,
@@ -405,7 +441,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 7PLBH66ETW;
+				DEVELOPMENT_TEAM = B36FU73BET;
 				INFOPLIST_FILE = Heisenberg/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = shameek.Heisenberg;
@@ -421,7 +457,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 7PLBH66ETW;
+				DEVELOPMENT_TEAM = B36FU73BET;
 				INFOPLIST_FILE = Heisenberg/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = shameek.Heisenberg;

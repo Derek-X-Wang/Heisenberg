@@ -11,5 +11,10 @@ target 'Heisenberg' do
   # Firebase
   pod 'Firebase/Core'
   pod 'Firebase/Database'
+  
+  pod 'AWSUserPoolsSignIn', '~> 2.6.6'
+  pod 'AWSAuthUI', '~> 2.6.6'
+  pod 'AWSMobileClient', '~> 2.6.6'
+  pod 'AWSDynamoDB', '~> 2.6.6'
 
 end
