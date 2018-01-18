@@ -44,22 +44,35 @@ class AWSContactManager {
                 let contacts = try store.unifiedContacts(matching: predicate, keysToFetch: keys as [CNKeyDescriptor])
                 print("🎈", $0.identifier, contacts.count)
                 let dynamoDBObjectMapper = AWSDynamoDBObjectMapper.default()
-                contacts.forEach {
-                    let contact = Contact()
-                    contact?._userId = self.uid
-                    let firstPhone = $0.phoneNumbers.first
+                let filteredContacts = contacts.filter({ (contact) -> Bool in
+                    let firstPhone = contact.phoneNumbers.first
                     let contactString = firstPhone == nil ? "Unknown" : firstPhone!.value.stringValue
-                    contact?._number = formatNumber(contactString)
-                    contact?._name = formatName(givenName: $0.givenName, familyName: $0.familyName)
-                    print("Contact:\n  userId -> \(contact!._userId!)\n  number -> \(contact!._number!)\n  name -> \(contact!._name!)")
-                    dynamoDBObjectMapper.save(contact!, completionHandler: {(error: Error?) -> Void in
-                        if let error = error {
-                            print("The request dynamoDB failed. Error: \(error)")
-                            return
-                        }
-                        print("DynamoDB saved.")
-                    })
-                }
+                    let number = formatNumber(contactString)
+                    let name = formatName(givenName: contact.givenName, familyName: contact.familyName)
+                    if number == "Unknown" || name == "Unknown" {
+                        return false
+                    }
+                    return true
+                })
+                var count = 0
+                let limit = 100
+                filteredContacts.forEach({ (userContact) in
+                    if count < limit {
+                        let contact = Contact()
+                        contact?._userId = self.uid
+                        contact?._number = userContact.phoneNumbers.first!.value.stringValue
+                        contact?._name = formatName(givenName: userContact.givenName, familyName: userContact.familyName)
+                        print("Contact:\n  userId -> \(contact!._userId!)\n  number -> \(contact!._number!)\n  name -> \(contact!._name!)")
+                        dynamoDBObjectMapper.save(contact!, completionHandler: {(error: Error?) -> Void in
+                            if let error = error {
+                                print("The request dynamoDB failed. Error: \(error)")
+                                return
+                            }
+                            print("DynamoDB saved.")
+                        })
+                    }
+                    count += 1
+                })
             })
         } catch let error {
             print("🎈 error fetching contacts", error.localizedDescription)
