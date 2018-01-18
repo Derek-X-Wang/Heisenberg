@@ -10,6 +10,7 @@ import UIKit
 import RxCocoa
 import RxSwift
 import Foundation
+import AWSAuthCore
 
 class ViewController: UIViewController {
     var disposeBag = DisposeBag()
@@ -18,7 +19,7 @@ class ViewController: UIViewController {
     /* Summy Results */
     let backgroundScheduler = ConcurrentDispatchQueueScheduler(qos: .userInitiated)
     let searchController = UISearchController(searchResultsController: nil)
-    let contactManager = AWSContactManager()
+    var contactManager: AWSContactManager?// = AWSContactManager()
     var results = [String]()
     
     override func viewDidAppear(_ animated: Bool) {
@@ -48,6 +49,22 @@ class ViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         
+        if let id = AWSIdentityManager.default().identityId {
+            setupContactManager(id)
+        } else {
+            print("identityId is null")
+            AWSIdentityManager.default().credentialsProvider.getIdentityId().continueOnSuccessWith(block: { (task) -> Any? in
+                let cognitoId = task.result! as String
+                print("get identityId as \(cognitoId)")
+                self.setupContactManager(cognitoId)
+                return nil
+            })
+        }
+    }
+    
+    func setupContactManager(_ id: String) {
+        contactManager = AWSContactManager(id)
+        
         searchController.searchBar.autocapitalizationType = .words
         searchController.searchBar.rx.text
             .debounce(0.5, scheduler: MainScheduler.instance)
@@ -60,7 +77,7 @@ class ViewController: UIViewController {
                 if query.isEmpty {
                     self?.results.removeAll()
                     self?.tableView.reloadData()
-                } 
+                }
             })
             .observeOn(backgroundScheduler)
             .filter({
@@ -72,7 +89,7 @@ class ViewController: UIViewController {
                 return $0 == $1
             })
             .flatMap({
-                return self.contactManager.search(query: $0)
+                return self.contactManager!.search(query: $0)
             })
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { (results) in
@@ -80,9 +97,9 @@ class ViewController: UIViewController {
                 self.results.append(contentsOf: results)
                 self.tableView.reloadData()
             })
-        .disposed(by: disposeBag)
+            .disposed(by: disposeBag)
         
-        self.contactManager.fetchContacts()
+        self.contactManager?.fetchContacts()
     }
     
     /* Keyboard Util */

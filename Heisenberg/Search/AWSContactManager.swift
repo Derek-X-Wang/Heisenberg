@@ -17,8 +17,8 @@ class AWSContactManager {
     
     var uid: String //= UIDevice.current.identifierForVendor!.uuidString
     
-    init() {
-        uid = AWSIdentityManager.default().identityId!
+    init(_ id: String) {
+        uid = id
     }
     
     func fetchContacts() {
