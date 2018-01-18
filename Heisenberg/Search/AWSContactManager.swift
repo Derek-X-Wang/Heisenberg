@@ -15,7 +15,11 @@ import RxSwift
 
 class AWSContactManager {
     
-    lazy var uid = UIDevice.current.identifierForVendor!.uuidString
+    var uid: String //= UIDevice.current.identifierForVendor!.uuidString
+    
+    init() {
+        uid = AWSIdentityManager.default().identityId!
+    }
     
     func fetchContacts() {
         let store = CNContactStore()
@@ -40,13 +44,12 @@ class AWSContactManager {
                 let contacts = try store.unifiedContacts(matching: predicate, keysToFetch: keys as [CNKeyDescriptor])
                 print("🎈", $0.identifier, contacts.count)
                 let dynamoDBObjectMapper = AWSDynamoDBObjectMapper.default()
-                let userId = AWSIdentityManager.default().identityId
                 contacts.forEach {
                     if let contactString = $0.phoneNumbers.first?.value.stringValue {
                         let contactNumber = formatKey(contactString)
                         if !contactNumber.isEmpty {
                             let contact = Contact()
-                            contact?._userId = userId
+                            contact?._userId = self.uid
                             contact?._number = formatKey(contactString)
                             contact?._name = $0.givenName + " " + $0.familyName
                             dynamoDBObjectMapper.save(contact!, completionHandler: {(error: Error?) -> Void in
@@ -82,11 +85,10 @@ class AWSContactManager {
         return Observable<[String]>.create { [unowned self] (observer) -> Disposable in
             let dynamoDBObjectMapper = AWSDynamoDBObjectMapper.default()
             let queryExpression = AWSDynamoDBQueryExpression()
-            let userId = AWSIdentityManager.default().identityId
             queryExpression.keyConditionExpression = "userId = :userId"
             queryExpression.filterExpression = "begins_with(#name, :input)"
             queryExpression.expressionAttributeNames = ["#name": "name",]
-            queryExpression.expressionAttributeValues = [":userId" : userId!, ":input" : query,]
+            queryExpression.expressionAttributeValues = [":userId" : self.uid, ":input" : query,]
             dynamoDBObjectMapper.query(Contact.self, expression: queryExpression).continueWith(block: { (task) -> Any? in
                 if let error = task.error as NSError? {
                     print("The request failed. Error: \(error)")
