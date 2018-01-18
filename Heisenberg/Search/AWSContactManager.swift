@@ -45,27 +45,45 @@ class AWSContactManager {
                 print("🎈", $0.identifier, contacts.count)
                 let dynamoDBObjectMapper = AWSDynamoDBObjectMapper.default()
                 contacts.forEach {
-                    if let contactString = $0.phoneNumbers.first?.value.stringValue {
-                        let contactNumber = formatKey(contactString)
-                        if !contactNumber.isEmpty {
-                            let contact = Contact()
-                            contact?._userId = self.uid
-                            contact?._number = formatKey(contactString)
-                            contact?._name = $0.givenName + " " + $0.familyName
-                            dynamoDBObjectMapper.save(contact!, completionHandler: {(error: Error?) -> Void in
-                                if let error = error {
-                                    print("The request dynamoDB failed. Error: \(error)")
-                                    return
-                                }
-                                print("DynamoDB saved.")
-                            })
+                    let contact = Contact()
+                    contact?._userId = self.uid
+                    let firstPhone = $0.phoneNumbers.first
+                    let contactString = firstPhone == nil ? "Unknown" : firstPhone!.value.stringValue
+                    contact?._number = formatNumber(contactString)
+                    contact?._name = formatName(givenName: $0.givenName, familyName: $0.familyName)
+                    print("Contact:\n  userId -> \(contact!._userId!)\n  number -> \(contact!._number!)\n  name -> \(contact!._name!)")
+                    dynamoDBObjectMapper.save(contact!, completionHandler: {(error: Error?) -> Void in
+                        if let error = error {
+                            print("The request dynamoDB failed. Error: \(error)")
+                            return
                         }
-                    }
+                        print("DynamoDB saved.")
+                    })
                 }
             })
         } catch let error {
             print("🎈 error fetching contacts", error.localizedDescription)
         }
+    }
+    
+    func formatName(givenName: String, familyName: String) -> String {
+        var res = "Unknown"
+        if !givenName.isEmpty && !familyName.isEmpty {
+            res = "\(givenName) \(familyName)"
+        } else if !givenName.isEmpty {
+            res = givenName
+        } else if !familyName.isEmpty {
+            res = familyName
+        }
+        return res
+    }
+    
+    func formatNumber(_ number: String) -> String {
+        let contactNumber = formatKey(number)
+        guard !contactNumber.isEmpty else {
+            return "Unknown"
+        }
+        return contactNumber
     }
     
     func formatKey(_ string: String) -> String {
@@ -74,10 +92,13 @@ class AWSContactManager {
             .replacingOccurrences(of: " ", with: "")
             .replacingOccurrences(of: ".", with: "")
             .replacingOccurrences(of: "-", with: "")
+            .replacingOccurrences(of: "+", with: "")
             .replacingOccurrences(of: "#", with: "")
             .replacingOccurrences(of: "$", with: "")
             .replacingOccurrences(of: "[", with: "")
             .replacingOccurrences(of: "]", with: "")
+            .replacingOccurrences(of: "(", with: "")
+            .replacingOccurrences(of: ")", with: "")
             .replacingOccurrences(of: "/", with: "")
     }
     
